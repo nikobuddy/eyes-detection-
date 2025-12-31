@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Camera with Text Overlays</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- face-api.js for face and eye detection -->
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+<body>
+    <div class="camera-container">
+        <video id="video" autoplay playsinline muted style="display: block; width: 100%; height: 100%; object-fit: cover;"></video>
+        <canvas id="output_canvas" style="display: none;"></canvas>
+        <!-- Overlay canvas for eye markers -->
+        <canvas id="overlay_canvas" class="overlay-canvas"></canvas>
+        <!-- Eye Markers -->
+        <div id="leftEyeMarker" class="eye-marker"></div>
+        <div id="rightEyeMarker" class="eye-marker"></div>
+        <!-- Gaze Dot -->
+        <div id="gazeDot" class="gaze-dot"></div>
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <p>Starting camera...</p>
+        </div>
+        <div id="videoStatus" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2000; background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 10px;">
+            <p>Video Status: <span id="statusText">Waiting...</span></p>
+        </div>
+        
+        <!-- Text Overlays -->
+        <div class="overlay top-left" id="topLeft">
+            <span id="topLeftText">Top Left Text</span>
+        </div>
+        
+        <div class="overlay top-right" id="topRight">
+            <span id="topRightText">Top Right Text</span>
+        </div>
+        
+        <div class="overlay bottom-left" id="bottomLeft">
+            <span id="bottomLeftText">Bottom Left Text</span>
+        </div>
+        
+        <div class="overlay bottom-right" id="bottomRight">
+            <span id="bottomRightText">Bottom Right Text</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="startBtn" type="button">Start Camera</button>
+        <button id="stopBtn" type="button" disabled>Stop Camera</button>
+        <button id="fullscreenBtn" type="button">Toggle Fullscreen</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
